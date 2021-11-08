@@ -1,0 +1,17 @@
+<html>
+    <a href="{{ url_for('Campaigns') }}" > Back to Campaign Table </a>
+    <div class='form'>
+        <form action="" method="POST">
+            {{ form.hidden_tag() }}
+            {{ form.Campaign_Name.label }} {{ form.Campaign_Name }}
+            <br>
+            {{ form.Campaign_Setting.label }} {{ form.Campaign_Setting }}
+            <br>
+            {{ form.No_of_Players.label }} {{ form.No_of_Players }}
+            <br>
+            {{ form.Books_Used.label }} {{ form.Books_Used }}
+            <br>
+            {{ form.submit}}
+        </form>
+    </div>
+</html>
