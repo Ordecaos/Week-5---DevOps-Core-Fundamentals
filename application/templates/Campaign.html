@@ -12,16 +12,16 @@
             <td> Operations </td>
         </tr>
         
-        (% for record in records %)
+        {% for record in records %}
 
         <tr>
-            <td><a href="a href={{ url_for('Campaign_Info'), Campaign_ID=record.Campaign_ID}} ">{{ record.Campaign_Name }}</a> </td>
-            <td>{{ record.Campaign_Setting }</td>
-            <td><a href="a href={{ url_for('Edit_Campaign'), Campaign_ID=record.Campaign_ID}} "> Edit </a> <a href="a href={{ url_for('Delete_Campaign'), Campaign_ID=record.Campaign_ID}} "> Delete</a></td>
+            <td><a href="{{ url_for('Campaign_Info', Campaign_ID=record.Campaign_ID)}} ">{{ record.Campaign_Name }}</a> </td>
+            <td>{{ record.Campaign_Setting }}</td>
+            <td><a href="{{ url_for('Edit_Campaign', Campaign_ID=record.Campaign_ID)}} "> Edit </a> <a href="{{ url_for('Delete_Campaign', Campaign_ID=record.Campaign_ID)}} "> Delete</a></td>
         </tr>
 
     </table>
 
-        (% endfor %)
+        {% endfor %}
     </centre>
 </html>

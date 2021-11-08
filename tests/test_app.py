@@ -1,7 +1,7 @@
 from flask import url_for
 from flask_testing import TestCase
 from application import app, db
-from application.models import Players, Campaigns, Books
+from application.models import PlayersTable, CampaignsTable, BooksTable
 from application.form import Add_Player, Update_Player, Add_Campaign, Update_Campaign, Add_Book, Update_Book
 import application.routes
 from os import getenv
@@ -17,7 +17,7 @@ class TestGen(TestCase):
 
     def setUp(self):
         db.create_all()
-        Pl_sample = Players(Player_name='Jack', Character_Name='Paravax', Character_Level=16, Character_Class='Wizard', Character_Race='Dragonborn', Campaign=1)
+        Pl_sample = Players(Player_name='Jack', Character_Name='Paravax', Character_Level=16, Character_Class='Wizard', Character_Race='Dragonborn', Campaign_In=1)
         Ca_sample = Campaigns(Campaign_Name='Cities of Chrey', Campaign_Setting='Medival', No_of_Players=1, Books_Used=1)
         Bo_sample = Books(Book_Name='Dungeon Masters Guide', Book_Contents='Rules')
         db.session.add(Pl_sample)
@@ -47,21 +47,21 @@ class Pla_Tests(TestGen):
 
     def test_add_pla(self):
         response = self.client.post(
-            url_for('Add_Player'),
-            data = dict(Player_name='David', Character_Name='Devon', Character_Level=3, Character_Class='Artificer', Character_Race='Human', Campaign=1)
+            url_for('Add_Players'),
+            data = dict(Player_name='David', Character_Name='Devon', Character_Level=3, Character_Class='Artificer', Character_Race='Human', Campaign_In=1)
             follow_redirects = True)
         self.assertIn(b'David', response.data)
 
     def test_add_cam(self):
         response = self.client.post(
-            url_for('Add_Campaign'),
+            url_for('Add_Campaigns'),
             data = dict(Campaign_Name='Dark Visions', Campaign_Setting='High Tech', No_of_Players=1, Books_Used=1)
             follow_redirects = True)
         self.assertIn(b'Dark Visions', response.data)
 
     def test_add_bo(self):
         response = self.client.post(
-            url_for('Add_Book'),
+            url_for('Add_Books'),
             data = dict(Book_Name='Tasha', Book_Contents='Spells')
             follow_redirects = True)
         self.assertIn(b'Tasha', response.data)
@@ -69,7 +69,7 @@ class Pla_Tests(TestGen):
     def test_update_pla(self):
         response = self.client.post(
             url_for('Player_Edit', Player_ID=1),
-            data = dict(Player_name='Luke', Character_Name='Balraz', Character_Level=3, Character_Class='Paladin', Character_Race='Dragonborn', Campaign=1)
+            data = dict(Player_name='Luke', Character_Name='Balraz', Character_Level=3, Character_Class='Paladin', Character_Race='Dragonborn', Campaign_In=1)
             follow_redirects = True)
         self.assertIn(b'Luke', response.data)
 
@@ -118,17 +118,17 @@ class Pla_Tests(TestGen):
         self.assertIn(b'Dungeon Masters Guide', response.data)
 
     def test_view_new_pla(self):
-        response = self.client.get(url_for('Add_Player'))
+        response = self.client.get(url_for('Add_Players'))
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Your Name', response.data)
     
     def test_view_new_cam(self):
-        response = self.client.get(url_for('Add_Campaign'))
+        response = self.client.get(url_for('Add_Campaigns'))
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Your Name', response.data)
 
     def test_view_new_bo(self):
-        response = self.client.get(url_for('Add_Book'))
+        response = self.client.get(url_for('Add_Books'))
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'The Campaign Name', response.data)
 
