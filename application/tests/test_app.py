@@ -1,7 +1,9 @@
 from flask import url_for
 from flask_testing import TestCase
-from app import app, db
-from models import Players, Campaigns, Books
+from application import app, db
+from application.models import Players, Campaigns, Books
+from application.form import Add_Player, Update_Player, Add_Campaign, Update_Campaign, Add_Book, Update_Book
+import application.routes
 from os import getenv
 
 class TestGen(TestCase):
