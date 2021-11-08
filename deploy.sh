@@ -17,7 +17,7 @@ if [ ${create} ]; then
   python3 create.py
 fi
 
-echo 'TESTING:'
-python3 -m pytest --cov=application
+#echo 'TESTING:'
+#python3 -m pytest --cov=application
 
-python3 app.pp
+python3 app.py
