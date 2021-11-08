@@ -75,14 +75,14 @@ class Pla_Tests(TestGen):
 
     def test_update_cam(self):
         response = self.client.post(
-            url_for('Campaign_Edit', Campaign_ID=101),
+            url_for('Campaign_Edit', Campaign_ID=1),
             data = dict(Campaign_Name='Night Skies', Campaign_Setting='Low Fantasy', No_of_Players=1, Books_Used=1)
             follow_redirects = True)
         self.assertIn(b'Night Skies', response.data)
         
     def test_update_bo(self):
         response = self.client.post(
-            url_for('Book_Edit', Book_ID=201),
+            url_for('Book_Edit', Book_ID=1),
             data = dict(Book_Name='Ravnica', Book_Contents='Setting')
             follow_redirects = True)
         self.assertIn(b'Ravnica', response.data)
@@ -93,12 +93,12 @@ class Pla_Tests(TestGen):
         self.assertIn(b'Player Information', response.data)
 
     def test_del_cam(self):
-        response = self.client.get(url_for('Delete_Campaign', Campaign_ID = 101) follow_redirects=True)
+        response = self.client.get(url_for('Delete_Campaign', Campaign_ID = 1) follow_redirects=True)
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Campaign Information', response.data)
 
     def test_del_bo(self):
-        response = self.client.get(url_for('Delete_Book', Book_ID = 201) follow_redirects=True)
+        response = self.client.get(url_for('Delete_Book', Book_ID = 1) follow_redirects=True)
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Book Information', response.data)
 
@@ -108,12 +108,12 @@ class Pla_Tests(TestGen):
         self.assertIn(b'Jack', response.data)
 
     def test_cam_info(self):
-        response = self.client.get(url_for('Campaign_Info', Campaign_ID=101))
+        response = self.client.get(url_for('Campaign_Info', Campaign_ID=1))
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Cities of Chrey', response.data)
 
     def test_bo_info(self):
-        response = self.client.get(url_for('Book_Info', Book_ID=201))
+        response = self.client.get(url_for('Book_Info', Book_ID=1))
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Dungeon Masters Guide', response.data)
 
@@ -138,11 +138,11 @@ class Pla_Tests(TestGen):
         self.assertIn(b'Name', response.data)
 
     def test_view_edit_cam(self):
-        response = self.client.get(url_for('Edit_Campaign', Campaign_ID=101))
+        response = self.client.get(url_for('Edit_Campaign', Campaign_ID=1))
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Name', response.data)
 
     def test_view_edit_bo(self):
-        response = self.client.get(url_for('Edit_Book', Player_ID=201))
+        response = self.client.get(url_for('Edit_Book', Player_ID=1))
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Name', response.data)
