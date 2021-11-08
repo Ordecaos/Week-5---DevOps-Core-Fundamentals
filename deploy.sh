@@ -17,6 +17,6 @@ if [ ${create} ]; then
   python3 create.py
 fi
 
-python3 -m pytest --cov
+python3 -m pytest --cov=application
 
 #python3 app.pp
