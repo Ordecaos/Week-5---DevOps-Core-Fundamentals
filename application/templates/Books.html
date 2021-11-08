@@ -1,0 +1,27 @@
+<html>
+    <centre><h2> Campaign Tables</h2>
+    <a href="{{ url_for('home') }}" > Back to Home </a>
+    <br>
+    <br>
+    <br>
+    <a href="{{ url_for('Add_Book') }}"> New Book </a> 
+    <table>
+        <tr>
+            <td> Book Name </td>
+            <td> Book Contents </td>
+            <td> Operations </td>
+        </tr>
+        
+        (% for record in records %)
+
+        <tr>
+            <td><a href="a href={{ url_for('Book_Info'), Book_ID=record.Book_ID}} ">{{ record.Book_Name }}</a> </td>
+            <td>{{ record.Book_Contents }</td>
+            <td><a href="a href={{ url_for('Edit_Book'), Book_ID=record.Book_ID}} "> Edit </a> <a href="a href={{ url_for('Delete_Book'), Book_ID=record.Book_ID}} "> Delete</a></td>
+        </tr>
+
+    </table>
+
+        (% endfor %)
+    </centre>
+</html>

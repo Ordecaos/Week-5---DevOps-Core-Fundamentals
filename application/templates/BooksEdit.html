@@ -1,0 +1,13 @@
+<html>
+    <a href="{{ url_for('Books') }}" > Back to Books Table </a>
+    <div class='form'>
+        <form action="" method="POST">
+            {{ form.hidden_tag() }}
+            {{ form.Book_Name.label }} {{ form.Book_Name }}
+            <br>
+            {{ form.Book_Contents.label }} {{ form.Book_Contents }}
+            <br>
+            {{ form.submit}}
+        </form>
+    </div>
+</html>
