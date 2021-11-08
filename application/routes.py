@@ -8,7 +8,7 @@ def home():
     return render_template('Homepage.html')
 
 @app.route('/Players')
-def Players():
+def Player_Page():
     pla_id = Players.query.all()
     return render_template('Players.html', records=pla_id)
 
@@ -33,7 +33,7 @@ def Add_Player():
         return redirect("/Players")
     return render_template("Playerinput.html", form=form)
 
-@app.route('/PlayerEdit/<int:Player_ID')
+@app.route('/PlayerEdit/<int:Player_ID>')
 def Edit_Player(Player_ID):
     form = Update_Player()
     pla = Players.query.filter_by(Player_ID=Player_ID).first()
@@ -48,7 +48,7 @@ def Edit_Player(Player_ID):
         return redirect("/Players")
     return render_template("Playerinput.html", form=form)
 
-@app.route('/PlayerDelete/<int:Player_ID')
+@app.route('/PlayerDelete/<int:Player_ID>')
 def Delete_Player(Player_ID):
     pla = Players.query.filter_by(Player_ID=Player_ID).first()
     db.session.delete(pla)
@@ -56,7 +56,7 @@ def Delete_Player(Player_ID):
     return redirect("/Players")
 
 @app.route('/Campaigns')
-def Campaigns():
+def Campaign_Page():
     cam_id = Campaigns.query.all()
     return render_template('Campaign.html', records=cam_id)
 
@@ -100,7 +100,7 @@ def Delete_Campaign(Campaign_ID):
     return redirect("/Campaigns")
 
 @app.route('/Books')
-def Books():
+def Book_Page():
     bo_id = Books.query.all()
     return render_template('Books.html', records=bo_id)
 

@@ -43,7 +43,7 @@ class Add_Book(FlaskForm):
     Book_Contents = StringField("Enter the contents of the book")
     submit = SubmitField("Add Book")
 
-class Update_Book(FlaskForm)
+class Update_Book(FlaskForm):
 
     Book_Name = StringField("The Books Name")
     Book_Contents = StringField("Enter the contents of the book")

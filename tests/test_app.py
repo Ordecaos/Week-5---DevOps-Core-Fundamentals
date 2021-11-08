@@ -31,17 +31,17 @@ class TestGen(TestCase):
 
 class Pla_Tests(TestGen):
     def test_pla_get(self):
-        response = self.client.get(url_for('Players'))
+        response = self.client.get(url_for('Player_Page'))
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Jack', response.data)
     
     def test_cam_get(self):
-        response = self.client.get(url_for('Campaigns'))
+        response = self.client.get(url_for('Campaign_Page'))
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Cities of Chrey', response.data)
 
     def test_bo_get(self):
-        response = self.client.get(url_for('Books'))
+        response = self.client.get(url_for('Book_Page'))
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Dungeon Masters Guide', response.data)
 
@@ -120,29 +120,29 @@ class Pla_Tests(TestGen):
     def test_view_new_pla(self):
         response = self.client.get(url_for('Add_Player'))
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Name', response.data)
+        self.assertIn(b'Your Name', response.data)
     
     def test_view_new_cam(self):
         response = self.client.get(url_for('Add_Campaign'))
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Name', response.data)
+        self.assertIn(b'Your Name', response.data)
 
     def test_view_new_bo(self):
         response = self.client.get(url_for('Add_Book'))
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Name', response.data)
+        self.assertIn(b'The Campaign Name', response.data)
 
     def test_view_edit_pla(self):
         response = self.client.get(url_for('Edit_Player', Player_ID=1))
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Name', response.data)
+        self.assertIn(b'The Campaign Name', response.data)
 
     def test_view_edit_cam(self):
         response = self.client.get(url_for('Edit_Campaign', Campaign_ID=1))
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Name', response.data)
+        self.assertIn(b'The Books Name', response.data)
 
     def test_view_edit_bo(self):
         response = self.client.get(url_for('Edit_Book', Player_ID=1))
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Name', response.data)
+        self.assertIn(b'The Books Name', response.data)
