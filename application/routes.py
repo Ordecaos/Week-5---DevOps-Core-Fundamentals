@@ -53,7 +53,7 @@ def Delete_Player(Player_ID):
     pla = Players.query.filter_by(Player_ID=Player_ID).first()
     db.session.delete(pla)
     db.session.commit()
-    return redirect("/")
+    return redirect("/Players")
 
 @app.route('/Campaigns')
 def Campaigns():
