@@ -48,57 +48,58 @@ class Pla_Tests(TestGen):
     def test_add_pla(self):
         response = self.client.post(
             url_for('Add_Players'),
-            data = dict(Player_name='David', Character_Name='Devon', Character_Level=3, Character_Class='Artificer', Character_Race='Human', Campaign_In=1)
-            follow_redirects = True)
+            data = dict(Player_name='David', Character_Name='Devon', Character_Level=3, Character_Class='Artificer', Character_Race='Human', Campaign_In=1),
+            follow_redirects = True
+        )
         self.assertIn(b'David', response.data)
 
     def test_add_cam(self):
         response = self.client.post(
             url_for('Add_Campaigns'),
-            data = dict(Campaign_Name='Dark Visions', Campaign_Setting='High Tech', No_of_Players=1, Books_Used=1)
+            data = dict(Campaign_Name='Dark Visions', Campaign_Setting='High Tech', No_of_Players=1, Books_Used=1),
             follow_redirects = True)
         self.assertIn(b'Dark Visions', response.data)
 
     def test_add_bo(self):
         response = self.client.post(
             url_for('Add_Books'),
-            data = dict(Book_Name='Tasha', Book_Contents='Spells')
+            data = dict(Book_Name='Tasha', Book_Contents='Spells'),
             follow_redirects = True)
         self.assertIn(b'Tasha', response.data)
     
     def test_update_pla(self):
         response = self.client.post(
             url_for('Player_Edit', Player_ID=1),
-            data = dict(Player_name='Luke', Character_Name='Balraz', Character_Level=3, Character_Class='Paladin', Character_Race='Dragonborn', Campaign_In=1)
+            data = dict(Player_name='Luke', Character_Name='Balraz', Character_Level=3, Character_Class='Paladin', Character_Race='Dragonborn', Campaign_In=1),
             follow_redirects = True)
         self.assertIn(b'Luke', response.data)
 
     def test_update_cam(self):
         response = self.client.post(
             url_for('Campaign_Edit', Campaign_ID=1),
-            data = dict(Campaign_Name='Night Skies', Campaign_Setting='Low Fantasy', No_of_Players=1, Books_Used=1)
+            data = dict(Campaign_Name='Night Skies', Campaign_Setting='Low Fantasy', No_of_Players=1, Books_Used=1),
             follow_redirects = True)
         self.assertIn(b'Night Skies', response.data)
         
     def test_update_bo(self):
         response = self.client.post(
             url_for('Book_Edit', Book_ID=1),
-            data = dict(Book_Name='Ravnica', Book_Contents='Setting')
+            data = dict(Book_Name='Ravnica', Book_Contents='Setting'), 
             follow_redirects = True)
         self.assertIn(b'Ravnica', response.data)
 
     def test_del_pla(self):
-        response = self.client.get(url_for('Delete_Player', Player_ID = 1) follow_redirects=True)
+        response = self.client.get(url_for('Delete_Player', Player_ID = 1), follow_redirects=True)
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Player Information', response.data)
 
     def test_del_cam(self):
-        response = self.client.get(url_for('Delete_Campaign', Campaign_ID = 1) follow_redirects=True)
+        response = self.client.get(url_for('Delete_Campaign', Campaign_ID = 1), follow_redirects=True)
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Campaign Information', response.data)
 
     def test_del_bo(self):
-        response = self.client.get(url_for('Delete_Book', Book_ID = 1) follow_redirects=True)
+        response = self.client.get(url_for('Delete_Book', Book_ID = 1), follow_redirects=True)
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Book Information', response.data)
 

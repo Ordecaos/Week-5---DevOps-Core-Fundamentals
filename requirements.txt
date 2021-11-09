@@ -6,3 +6,4 @@ Flask_wtf
 pytest
 pytest-cov
 pymysql
+gunicorn
