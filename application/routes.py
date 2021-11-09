@@ -27,18 +27,18 @@ def Add_Players():
         Character_Class=form.Character_Class.data
         Character_Race=form.Character_Race.data
         Campaign_In=form.Campaign_In.data
-        NewPlayer = Add_Player(Pla_name=Name, Cha_name=Character_Name, Cha_level=Character_Level, Cha_class=Character_Class, Cha_race=Character_Race, Cam=Campaign)
+        NewPlayer = PlayersTable(Player_name=Name, Character_Name=Character_Name, Character_Level=Character_Level, Character_Class=Character_Class, Character_Race=Character_Race, Campaign_In=Campaign_In)
         db.session.add(NewPlayer)
         db.session.commit()
         return redirect("/Players")
     return render_template("Playerinput.html", form=form)
 
-@app.route('/PlayerEdit/<int:Player_ID>')
+@app.route('/PlayerEdit/<int:Player_ID>', methods=["GET", "POST"])
 def Edit_Player(Player_ID):
     form = Update_Player()
     pla = PlayersTable.query.filter_by(Player_ID=Player_ID).first()
     if request.method == 'POST':
-        pla.Name=form.Player_name.data
+        pla.Player_name=form.Player_name.data
         pla.Character_Name=form.Character_Name.data
         pla.Character_Level=form.Character_Level.data
         pla.Character_Class=form.Character_Class.data
@@ -73,21 +73,21 @@ def Add_Campaigns():
         Campaign_Setting=form.Campaign_Setting.data
         No_of_Players=form.No_of_Players.data
         Books_Used=form.Books_Used.data
-        NewCampaign = Add_Campaign(Cam_name=Campaign_Name, Cam_setting=Campaign_Setting, No_pla=No_of_Players, Book_Used=Books_Used)
+        NewCampaign = CampaignsTable(Campaign_Name=Campaign_Name, Campaign_Setting=Campaign_Setting, No_of_Players=No_of_Players, Books_Used=Books_Used)
         db.session.add(NewCampaign)
         db.session.commit()
         return redirect("/Campaigns")
     return render_template("Campaigninput.html", form=form)
 
-@app.route('/CampaignEdit/<int:Campaign_ID>')
+@app.route('/CampaignEdit/<int:Campaign_ID>', methods=["GET", "POST"])
 def Edit_Campaign(Campaign_ID):
     form = Update_Campaign()
     cam = CampaignsTable.query.filter_by(Campaign_ID=Campaign_ID).first()
     if request.method == 'POST':
-        Campaign_Name=form.Campaign_Name.data
-        Campaign_Setting=form.Campaign_Setting.data
-        No_of_Players=form.No_of_Players.data
-        Books_Used=form.Books_Used.data
+        cam.Campaign_Name=form.Campaign_Name.data
+        cam.Campaign_Setting=form.Campaign_Setting.data
+        cam.No_of_Players=form.No_of_Players.data
+        cam.Books_Used=form.Books_Used.data
         db.session.commit()
         return redirect("/Campaigns")
     return render_template("Campaigninput.html", form=form)
@@ -115,19 +115,19 @@ def Add_Books():
     if request.method == 'POST':
         Book_Name=form.Book_Name.data
         Book_Contents=form.Book_Contents.data
-        NewBook = Add_Book(Bo_name=Book_Name, Bo_Content=Book_Contents)
+        NewBook = BooksTable(Book_Name=Book_Name, Book_Contents=Book_Contents)
         db.session.add(NewBook)
         db.session.commit()
         return redirect("/Books")
     return render_template("Booksinput.html", form=form)
 
-@app.route('/BookEdit/<int:Book_ID>')
+@app.route('/BookEdit/<int:Book_ID>', methods=["GET", "POST"])
 def Edit_Book(Book_ID):
     form = Update_Book()
-    bo = BooksTable.query.filter_by(Book_ID_ID=Book_ID).first()
+    bo = BooksTable.query.filter_by(Book_ID=Book_ID).first()
     if request.method == 'POST':
-        Book_Name=form.Book_Name.data
-        Book_Contents=form.Book_Contents.data
+        bo.Book_Name=form.Book_Name.data
+        bo.Book_Contents=form.Book_Contents.data
         db.session.commit()
         return redirect("/Books")
     return render_template("Booksinput.html", form=form)
