@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo kill -9 $(sudo lsof -i:5000 | cut -d' ' -f2)
+
 sudo apt install python3 python3-pip python3-venv -y
 
 python3 -m venv venv
