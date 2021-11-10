@@ -38,6 +38,8 @@ On the subject of the application itself, I have decided to implement a database
 
 The database will be one based on the popular Tabletop Roleplaying Game, Dungeons and Dragons. It will allow the storage of player infromation, campaign information as well as information on the various books used in D&D. Campaigns will have a one to many relationship with Players, as many players can be in a single campaign, and Books will have a one to many relationship with campaigns, as one book can be used in multiple campaigns.
 
+![EDR](https://github.com/Ordecaos/Week-5---DevOps-Core-Fundamentals/blob/main/Images/D&D%20database%20Design.png?raw=true)
+
 ## Technical Design
 
 When undertaking a project, it's always important to consider the various technologies that will be used in it's development as well as the rationale as to why it was chosen, as such this section will give an overview of these technologies.
@@ -122,23 +124,58 @@ While rarely considered, there are several physical issues that can crop up duri
 
 These Physical Hazards are bound to occur eventually. However the effects can be mitigated or controlled on the developers side by taking regular 15 minute breaks throughout developments, ensuring that the mind and body are allowed enough rest before continuing with the project. 
 
+![Matrix]()
+
 ## Testing
 
 Testing is an essential part of any and all development processes, especially with the Test Driven Development nature of projects such as these. 
 
 These tests will primarily be used to test the functionality of the application, having tests for creating, reading, editing and deleting records within the three databases and ensuring correct and thorough working.
 
+As you can see from the following image, my program fully passes all 21 tests with 99% coverage.
+
+![Tests]()
+
 ## The Application
 
+Working fully and completely the following images display the functionality of the webpage. Allowing naviagation to the three main portions of the web page as well as the information section and inputs and edits.
 
+![Homepage](https://github.com/Ordecaos/Week-5---DevOps-Core-Fundamentals/blob/main/Images/Homepage.png?raw=true)
+
+![PlayersPage](https://github.com/Ordecaos/Week-5---DevOps-Core-Fundamentals/blob/main/Images/PlayerPage.png?raw=true)
+
+![PlayerInput](https://github.com/Ordecaos/Week-5---DevOps-Core-Fundamentals/blob/main/Images/PlayerInsert.png?raw=true)
+
+![PlayerInformation](https://github.com/Ordecaos/Week-5---DevOps-Core-Fundamentals/blob/main/Images/PlayerInfo.png?raw=true)
+
+![PlayerEdit](https://github.com/Ordecaos/Week-5---DevOps-Core-Fundamentals/blob/main/Images/PlayerEdit.png?raw=true)
+
+![CampaignsPage](https://github.com/Ordecaos/Week-5---DevOps-Core-Fundamentals/blob/main/Images/CampaignPage.png?raw=true)
+
+![CampaignInput](https://github.com/Ordecaos/Week-5---DevOps-Core-Fundamentals/blob/main/Images/CampaignInsert.png?raw=true)
+
+![CampaignInformation](https://github.com/Ordecaos/Week-5---DevOps-Core-Fundamentals/blob/main/Images/CampaignInfo.png?raw=true)
+
+![CampaignEdit](https://github.com/Ordecaos/Week-5---DevOps-Core-Fundamentals/blob/main/Images/CampaignEdit.png?raw=true)
+
+![BooksPage](https://github.com/Ordecaos/Week-5---DevOps-Core-Fundamentals/blob/main/Images/BookPage.png?raw=true)
+
+![BookInput](https://github.com/Ordecaos/Week-5---DevOps-Core-Fundamentals/blob/main/Images/BookInsert.png?raw=true)
+
+![BookInformation](https://github.com/Ordecaos/Week-5---DevOps-Core-Fundamentals/blob/main/Images/BookInfo.png?raw=true)
+
+![BookEdit](https://github.com/Ordecaos/Week-5---DevOps-Core-Fundamentals/blob/main/Images/BookEdit.png?raw=true)
 
 ## Known Issues
 
+The following is a brief list of known issues involving the application.
 
+1. When creating a file, the application does not count the ID's correctly. When a file is deleted, it still goes to the next number in the sequence.
 
 ## Future Developments
 
-
+If I were to continue developing this project I would add additional functionality. The ability to filter records, adding subclasses to Players, Notes to Campaigns and more detils to book contents and so on. Additionally, I would add a log in page so that only authorized individuals could use the webpage.
 
 ## What would be done differently
 
+Given my current skill and ability and the education I have been given thus far I believe that this is the best project that I would be able to produce. 
