@@ -2,13 +2,13 @@ from flask import url_for
 from flask_testing import TestCase
 from application import app, db
 from application.models import PlayersTable, CampaignsTable, BooksTable
-from application.form import Add_Player, Update_Player, Add_Campaign, Update_Campaign, Add_Book, Update_Book
+from application.forms import Add_Player, Update_Player, Add_Campaign, Update_Campaign, Add_Book, Update_Book
 import application.routes
 from os import getenv
 
 class TestGen(TestCase):
     def create_app(self):
-        app.config.update(SQLALCHEMY_DATABASE_URI='db_uri',
+        app.config.update(SQLALCHEMY_DATABASE_URI='mysql+pymysql://root:TheDarkness14@35.246.25.117:3306/dnd',
         SECRET_KEY='TEST_SECRET_KEY',
         DEBUG=True,
         WTF_CSRF_ENABLED=False
@@ -17,12 +17,14 @@ class TestGen(TestCase):
 
     def setUp(self):
         db.create_all()
-        Pl_sample = Players(Player_name='Jack', Character_Name='Paravax', Character_Level=16, Character_Class='Wizard', Character_Race='Dragonborn', Campaign_In=1)
-        Ca_sample = Campaigns(Campaign_Name='Cities of Chrey', Campaign_Setting='Medival', No_of_Players=1, Books_Used=1)
-        Bo_sample = Books(Book_Name='Dungeon Masters Guide', Book_Contents='Rules')
-        db.session.add(Pl_sample)
-        db.session.add(Ca_sample)
+        Bo_sample = BooksTable(Book_Name='Dungeon Masters Guide', Book_Contents='Rules')
         db.session.add(Bo_sample)
+        db.session.commit()
+        Ca_sample = CampaignsTable(Campaign_Name='Cities of Chrey', Campaign_Setting='Medival', No_of_Players=1, Books_Used=Bo_sample.Book_ID)
+        db.session.add(Ca_sample)
+        db.session.commit()
+        Pl_sample = PlayersTable(Player_name='Jack', Character_Name='Paravax', Character_Level=16, Character_Class='Wizard', Character_Race='Dragonborn', Campaign_In=Ca_sample.Campaign_ID)
+        db.session.add(Pl_sample)
         db.session.commit()
 
     def tearDown(self):
@@ -69,21 +71,21 @@ class Pla_Tests(TestGen):
     
     def test_update_pla(self):
         response = self.client.post(
-            url_for('Player_Edit', Player_ID=1),
+            url_for('Edit_Player', Player_ID = 1),
             data = dict(Player_name='Luke', Character_Name='Balraz', Character_Level=3, Character_Class='Paladin', Character_Race='Dragonborn', Campaign_In=1),
             follow_redirects = True)
         self.assertIn(b'Luke', response.data)
 
     def test_update_cam(self):
         response = self.client.post(
-            url_for('Campaign_Edit', Campaign_ID=1),
+            url_for('Edit_Campaign', Campaign_ID = 1),
             data = dict(Campaign_Name='Night Skies', Campaign_Setting='Low Fantasy', No_of_Players=1, Books_Used=1),
             follow_redirects = True)
         self.assertIn(b'Night Skies', response.data)
         
     def test_update_bo(self):
         response = self.client.post(
-            url_for('Book_Edit', Book_ID=1),
+            url_for('Edit_Book', Book_ID = 1),
             data = dict(Book_Name='Ravnica', Book_Contents='Setting'), 
             follow_redirects = True)
         self.assertIn(b'Ravnica', response.data)
@@ -91,17 +93,17 @@ class Pla_Tests(TestGen):
     def test_del_pla(self):
         response = self.client.get(url_for('Delete_Player', Player_ID = 1), follow_redirects=True)
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Player Information', response.data)
+        self.assertIn(b'Players Tables', response.data)
 
     def test_del_cam(self):
         response = self.client.get(url_for('Delete_Campaign', Campaign_ID = 1), follow_redirects=True)
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Campaign Information', response.data)
+        self.assertIn(b'Campaign Tables', response.data)
 
     def test_del_bo(self):
         response = self.client.get(url_for('Delete_Book', Book_ID = 1), follow_redirects=True)
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Book Information', response.data)
+        self.assertIn(b'Books Tables', response.data)
 
     def test_pla_info(self):
         response = self.client.get(url_for('Player_Info', Player_ID=1))
@@ -121,29 +123,29 @@ class Pla_Tests(TestGen):
     def test_view_new_pla(self):
         response = self.client.get(url_for('Add_Players'))
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Your Name', response.data)
+        self.assertIn(b'Back to Players Table', response.data)
     
     def test_view_new_cam(self):
         response = self.client.get(url_for('Add_Campaigns'))
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Your Name', response.data)
+        self.assertIn(b'Back to Campaign Table', response.data)
 
     def test_view_new_bo(self):
         response = self.client.get(url_for('Add_Books'))
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'The Campaign Name', response.data)
+        self.assertIn(b'Back to Books Table', response.data)
 
     def test_view_edit_pla(self):
         response = self.client.get(url_for('Edit_Player', Player_ID=1))
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'The Campaign Name', response.data)
+        self.assertIn(b'Back to Players Table', response.data)
 
     def test_view_edit_cam(self):
         response = self.client.get(url_for('Edit_Campaign', Campaign_ID=1))
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'The Books Name', response.data)
+        self.assertIn(b'Back to Campaign Table', response.data)
 
     def test_view_edit_bo(self):
-        response = self.client.get(url_for('Edit_Book', Player_ID=1))
+        response = self.client.get(url_for('Edit_Book', Book_ID=1))
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'The Books Name', response.data)
+        self.assertIn(b'Back to Books Table', response.data)
