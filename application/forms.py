@@ -1,6 +1,8 @@
 from flask_wtf import FlaskForm
 from wtforms import IntegerField, StringField, SelectField, SubmitField
 
+#This contains the various forms that I use in this app. As I use three databases, they all need new records and updated records and as such, each database has two distinct forms for these needs.
+
 class Add_Player(FlaskForm):
     
     Player_name = StringField("Your Name")
