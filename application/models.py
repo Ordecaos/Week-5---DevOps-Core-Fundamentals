@@ -1,5 +1,7 @@
 from application import db
 
+#When creating an application that uses python, HTML and SQL it's important to have a strong connection between the three. This file connects the Python code directly to the SQL database. This uses the class feature of Python to create near identical structure to SQL databases. This also connects foreign keys through the use of the relationship lines, essentially creating invisible fields that connect the databases.
+
 class PlayersTable(db.Model):
     Player_ID = db.Column(db.Integer, primary_key = True)
     Player_name = db.Column(db.String(255))

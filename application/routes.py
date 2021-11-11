@@ -3,6 +3,8 @@ from application import app, db
 from application.forms import Add_Player, Update_Player, Add_Campaign, Update_Campaign, Add_Book, Update_Book
 from application.models import PlayersTable, CampaignsTable, BooksTable
 
+#This file is what allows the HTML portion of the code to navigate between the various pages and processes. Everything from viewing the page to inputting new records, editing existing ones and deleting existing records.
+
 @app.route('/')
 def home():
     return render_template('Homepage.html')
