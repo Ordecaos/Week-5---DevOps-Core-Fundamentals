@@ -30,7 +30,7 @@ Git and Github are the choices of repository that I have decided to go with. Git
 
 Speaking of Virtual Machine, this project will be using the Google Cloud Platform (GCP) and running on a virtual machine that runs Ubuntu 20.04. GCP allows all necessary portions of the project including the SQL database to be implemented and used online as well as adding a firewall for security purposes.
 
-Finally, Jenkins will be used as a build server in order to provide automation in building and testing this project.
+Finally, Jenkins will be used as a build server in order to provide automation in building and testing this project. Jenkins is an extremely useful CI tool and allows quick and easy understanding as if the project works and how or why it may not.
 
 ## App Design
 
@@ -171,10 +171,11 @@ Working fully and completely the following images display the functionality of t
 The following is a brief list of known issues involving the application.
 
 1. When creating a file, the application does not count the ID's correctly. When a file is deleted, it still goes to the next number in the sequence.
+2. Jenkins implementation is not as thorough as I wish. Jenkins is only able to test the application, not deploy it.
 
 ## Future Developments
 
-If I were to continue developing this project I would add additional functionality. The ability to filter records, adding subclasses to Players, Notes to Campaigns and more detils to book contents and so on. Additionally, I would add a log in page so that only authorized individuals could use the webpage.
+If I were to continue developing this project I would add additional functionality. The ability to filter records, adding subclasses to Players, Notes to Campaigns and more detils to book contents and so on. Additionally, I would add a log in page so that only authorized individuals could use the webpage and work on ironing out any issuesn that are present within the application.
 
 ## What would be done differently
 
